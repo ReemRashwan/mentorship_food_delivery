@@ -1,0 +1,75 @@
+@startuml
+autonumber
+skinparam BoxPadding 10
+skinparam ParticipantPadding 10
+
+actor "User" as user
+participant "Frontend UI" as ui
+participant "Backend System" as backend
+database "Database" as db
+
+== Registration Initialization ==
+user -> ui : Open Registration
+ui -> user : Display Registration Options
+user -> ui : Choose Registration Option
+ui -> user : Display Specific Registration Form
+
+== Data Submission & Validation ==
+loop Until valid input and unique identity
+    user -> ui : Enter Registration Data (Email/Phone)
+    ui -> ui : Check Valid Data Format?
+    
+    alt Format is Invalid
+        ui -> user : Display Error Message
+    else Format is Valid
+        ui -> backend : Submit Form Data
+        backend -> backend : Hold Entered Data
+        backend -> db : Query DB for Similar Data
+        db --> backend : Return Query Result
+        
+        alt Same Identifying Data Exist? (Yes)
+            backend --> ui : Identity conflict error
+            ui -> user : Inform User to Choose another input data (phone or mail)
+        else Same Identifying Data Exist? (No)
+            backend --> ui : Data Unique, proceed to Verification
+        end
+    end
+end
+
+== Verification Code (OTP) ==
+backend -> backend : Send Verification Mail or message
+backend --> ui : Verification Sent Successfully
+ui -> user : Inform User About Verification Code and Show Form
+
+loop Until correct OTP or timeout / max retries
+    alt Session Timeout Check
+        ui -> ui : Check if within Session Timeout Period?
+        alt Timeout Reached (No)
+            ui -> ui : Wipe Entered Data
+            ui -> user : Session Expired, Redirect to Registration Form
+        end
+    end
+
+    user -> ui : Enter Verification Code
+    ui -> backend : Validate Verification Code
+    
+    alt Code is Correct
+        backend -> db : Save User Data To Database
+        db --> backend : Acknowledge Save
+        backend -> backend : Authorize User
+        backend --> ui : Registration Successful
+        ui -> user : Redirect to Authorized Dashboard
+    else Code is Incorrect
+        alt Wrong Code > 3 Times? (Yes)
+            backend -> db : Audit Attempt (Log Failure)
+            backend -> backend : Block User By Entered Credentials Temporarily
+            backend --> ui : Account Temporarily Blocked Error
+            ui -> user : Display Blocked Message & End Process
+        else Wrong Code <= 3 Times? (No)
+            backend --> ui : Invalid Code Error
+            ui -> user : Display Error Message on Top Of Verification Form
+        end
+    end
+end
+@endum
+@enduml

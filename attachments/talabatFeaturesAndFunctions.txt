@@ -1,0 +1,104 @@
+Store Management
+* Add Store: Add a store (restaurant, dine-in restaurant, pharmacy...) and choose its type during addition.
+* Remove Store: Remove a store.
+* Hide Store: Hide a store.
+* Show Store: Show a store.
+* Mark as Closed: Mark as closed.
+* Mark as Open: Mark as open.
+* Automated Closing: Mark as closed automatically.
+* Automated Opening: Mark as open automatically.
+* Calculate Store Addition Cost: Calculate the cost of adding a store.
+* Add Store Cost: Add a store cost.
+* Collect Store Cost: Collect the store cost.
+* Query Store Expenses: Query about store expenses.
+* Store Sales Report: A report of store sales.
+
+Inventory Management
+* Add Product: Add a product.
+* Add Product with Multi-Options: Add a product + add multiple options for the product + determine default options.
+* Add Product Categories: Add categories for products.
+* Delete Product: Delete a product.
+* Increase Product Stock: Increase stock of a product.
+* Decrease Product Stock: Decrease stock of a product.
+* Calculate Stock: Calculate stock.
+* Temporarily Hide Product: Hide a product temporarily.
+* Show Hidden Product: Show a hidden product.
+* Change Product Price: Change a product price.
+* Change Product Price for a Certain Period: Change a product price for a certain period.
+* Edit Product Attributes: Edit product attributes (name, description, or other).
+
+Customer Management
+* Registration: Registration (I think it was by mail or phone number).
+* Password Recovery: Retrieve password.
+* Send Confirmation Email: Send confirmation mail.
+* Show Customer Data: Show customer data.
+* Add Address: Add an address.
+* Set Main Address: Mark an address as a main address.
+* Show Map: Show the map.
+* Save Customer Preferences: Save customer preferences in his orders.
+* Show Customer Preferences: Show customer preferences when ordering.
+* Search Nearby Stores: Search for stores close to the customer's range.
+
+Application and Interface Management
+* Change Language: Change language.
+* Support and Help: Support and help.
+
+Order Management
+* Browse Store Categories: Browse store categories.
+* Search: Search by store or product name.
+* Filter and Sort Search: Filter and arrange search calculation based on several factors.
+* Open Store Menu: Open a store menu.
+* Browse All Store Products: Browse all products of the store.
+* Search in Store Products: Search in the products of the store.
+* Add Product to Cart: Add a product to the cart.
+* Multi-Cart Retention: Add a product to a cart belonging to another store while maintaining the previous cart.
+* Delete Product from Cart: Delete a product from the cart.
+* Show Customer Preferences: Show customer preferences (previously ordered).
+* Show Product Statistics: Show product statistics (best seller, ordered more than 500 times?).
+* Show Cart Summary: Show cart summary.
+* Send Order to Store: Send the order to the store.
+* Change Order Status: Change order status from the store.
+* Notify Customer of Order Status: Inform the customer of the order status.
+* Show Available Payment Methods: Show available payment methods.
+* Show Order and Payment Summary: Show order and payment summary before completing the order.
+* Complete Order: Complete the order after confirming its validity.
+* Browse Past Orders: Browse past orders.
+* Disable Order: Disable the order when unable to collect the debt.
+* Report a Problem: Report a problem in the order.
+
+Courier Management
+* Add Courier: Add a courier.
+* Delete Courier: Delete a courier.
+* Search Nearby Couriers: Search for couriers close to the store's range.
+* Assign Courier: Assign a courier to a specific store.
+* Show Amount Details: Show details of the amount to be collected.
+* Show Map to Store: Show the map and road to the store.
+* Mark Order as Received by Restaurant: Mark the order as received by the restaurant.
+* Show Map to Customer's House: Show the map to the customer's house.
+* Show Customer Contact Data: Show communication data with the customer.
+* Collect Order Amount: Collect the order amount.
+* Mark Order as Received by Customer: Mark the order as received by the customer.
+* Non-Collection Complaint: Complaint of non-collection.
+
+Payments
+* Add Card: Add a card.
+* Verify Card: Verify the card from the bank.
+* Save Card: Save the card for later use.
+* Add Payment Method: Add a payment method.
+* Delete Payment Method: Delete a payment method.
+* Disable Payment Method: Disable a payment method.
+* Collect Money from Bank: Collect money from the bank.
+* Manual Money Collection: Manual money collection.
+* Collect Money from Wallet: Collect money from the customer's wallet.
+* Buy Now Pay Later Feature: Buy now and pay later feature (adding balance to the customer - deducting balance - calculating collection date - calculating collection amount - collecting the amount on the specified day).
+
+Customer Service
+* Add or Delete Representative: Add a service representative or delete him.
+* Show Data to Representative: Show customer and order data to the representative.
+* Instant Messaging: Instant messaging between the representative and the customer.
+* Store Complaint State: Store complaint or help status.
+* Add Balance to Customer: Add balance to the customer.
+
+System Administration
+* Show Store Statistics: Show store statistics.
+* Manage Available Settings: Manage available settings.

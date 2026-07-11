@@ -1,0 +1,91 @@
+@startuml
+autonumber
+
+actor "User" as user
+participant "Frontend UI" as ui
+participant "Backend System" as backend
+participant "Verification Sender" as otpService
+database "Database" as db
+
+== Login Initialization & Credentials ==
+user -> ui : Request Login Page
+ui -> user : Display Login Form
+user -> ui : Choose Favourite Login Method
+ui -> user : Display Form According to login method
+
+loop Until valid credentials format
+    user -> ui : Enter Credentials
+    ui -> ui : Valid Credentials Format?
+    alt Format is Invalid
+        ui -> user : Display Error Message to Enter Correct Data
+    else Format is Valid
+        ui -> backend : Submit Credentials
+    end
+end
+
+backend -> backend : Save Credentials (In Context)
+
+== OTP Channel Selection & Sending ==
+loop Until OTP is Sent Successfully
+    backend --> ui : Render favourite verify channel options
+    ui -> user : Display favourite verify channel
+    user -> ui : Choose favorite verification channel
+    ui -> backend : Request OTP (Verification Method + Credentials)
+    
+    backend -> otpService : Trigger OTP Sending
+    otpService --> backend : OTP Saved & Status Response
+    
+    backend -> backend : OTP Sent Correctly?
+    alt Sent Failed (No)
+        backend --> ui : Display Error Message
+    else Sent Successfully (Yes)
+        backend --> ui : OTP Sent Event
+    end
+end
+
+== OTP Verification ==
+ui -> user : Display Form To Enter OTP
+user -> ui : Enter OTP
+ui -> backend : Verify OTP
+
+backend -> backend : Correct OTP?
+backend -> db : Fetch User Data
+db --> backend : User Data Returned
+backend -> backend : User Data Saved (In Context)
+
+== User Existence & Authentication Check ==
+backend -> backend : User Exist?
+alt User Does Not Exist (No)
+    backend -> backend : Redirect to Registration Process
+    backend --> ui : Start Registration Process Flow
+else User Exists (Yes)
+    backend -> backend : Is Already Blocked?
+    alt Account Blocked (Yes)
+        backend --> ui : Redirect to Timer Screen
+        ui -> user : Display Timer for user to wait
+    else Account Active (No)
+        backend -> backend : Is Valid Credentials?
+        alt Credentials Valid (Yes)
+            backend -> backend : Authorize User
+            backend -> db : Save last successful login + reset retry counter
+            db --> backend : Acknowledge Write
+            backend --> ui : Render System Dashboard
+            ui -> user : Display System for User.
+        else Credentials Invalid (No)
+            backend -> db : Audit failing retry
+            db --> backend : Log Archived
+            
+            backend -> backend : Is failing for more than three times?
+            alt Failed > 3 Times (Yes)
+                backend -> backend : Block user for specific period based on attempt number
+                backend --> ui : Trigger Lockout Timer
+                ui -> user : Display Timer for user to wait
+            else Failed <= 3 Times (No)
+                backend --> ui : Invalid User Name or Password Error
+                ui -> user : Display "Invalid User Name or Password"
+            end
+        end
+    end
+end
+@endum
+@enduml
