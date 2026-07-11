@@ -125,34 +125,31 @@ This section groups artifacts for login and registration. Start with Login, then
 FUNCTION LoginFlow():
     START
     
-    // --- Row 1 ---
     Display Login Form
     User Chooses Favourite Login Method
     Display Form According to login method
     
-    LABEL UsertEnterCredentials:
-    Usert Enter Credentials
+    LABEL UserEntersCredentials:
+    User Enter Credentials
     
     IF NOT (Valid Credentials Format?) THEN
         Display Error Message to Enter Correct Data
-        GOTO UsertEnterCredentials
+        GOTO UserEntersCredentials
     ELSE
-        Save Credentials
+        Save Credentials in Memory
         Display favourite verify channel
         Choose favorite verification channel
         Verification Method + Credentials
         GOTO SendOTP
     ENDIF
 
-    // --- Row 2 & 3 ---
     LABEL SendOTP:
     Send OTP to The Verification Method
     Verification Sender (Subprocess)
-    OTP Saved
+    OTP Saved in Memory
     
     IF NOT (OTP Sent Correctly?) THEN
         Display Error Message
-        // Flows back to selection
         GOTO DisplayFavouriteVerifyChannel 
     ELSE
         GOTO DisplayFormToEnterOTP
@@ -164,7 +161,6 @@ FUNCTION LoginFlow():
     Verification Method + Credentials
     GOTO SendOTP
 
-    // --- Row 4 ---
     LABEL DisplayFormToEnterOTP:
     Display Form To Enter OTP
     User Enters OTP
@@ -174,22 +170,20 @@ FUNCTION LoginFlow():
         Query Database
         GOTO CheckUserExistence
     ELSE
-        // Note: Diagram does not explicitly map the 'No' path for Correct OTP?
-        // Assumed block state or loop based on visual flow continuity
+        Display Error Message
+        GOTO DisplayFormToEnterOTP
     ENDIF
 
-    // --- Row 5 ---
     LABEL CheckUserExistence:
     User Data Saved
     
     IF NOT (User Exist?) THEN
-        Registeration Process (Subprocess)
+        Registration Process (Subprocess)
         GOTO EndProcess
     ELSE
         GOTO CheckAlreadyBlocked
     ENDIF
 
-    // --- Row 6, 7 & 8 ---
     LABEL CheckAlreadyBlocked:
     IF (Is Already Blocked?) THEN
         GOTO DisplayTimerForUserToWait
@@ -241,7 +235,6 @@ FUNCTION LoginFlow():
 FUNCTION RegistrationFlow():
     START
     
-    // --- Row 1 ---
     Display Registration Options
     User Chooses Registration Option
     
@@ -250,7 +243,6 @@ FUNCTION RegistrationFlow():
     User Enters Registration Data
     GOTO ConnectorA
     
-    // --- Row 2 ---
     LABEL ConnectorA:
     IF NOT (Valid Data Format?) THEN
         Display Error Message
@@ -267,7 +259,6 @@ FUNCTION RegistrationFlow():
         ENDIF
     ENDIF
     
-    // --- Row 3 ---
     LABEL ConnectorB:
     Send Verification Mail or message
     Inform User About Verification Code and Show Form
@@ -282,7 +273,6 @@ FUNCTION RegistrationFlow():
         GOTO ConnectorC
     ENDIF
     
-    // --- Row 4 ---
     LABEL ConnectorC:
     User Enters Verification Code
     
