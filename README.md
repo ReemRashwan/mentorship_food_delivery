@@ -13,7 +13,7 @@ Table of contents
 - [Section 2 — User Registration and Login (Week 9)](#section-2-week-9)
   - [Login](#login)
     - [Flowchart](#login-flowchart)
-    - [Sequence diagram (PlantUML)](#login-sequence-diagram)
+    - [Sequence diagram](#login-sequence-diagram)
     - [Pseudocode](#login-pseudocode)
     - [ERD](#erd)
   - [Registration](#registration)
@@ -220,17 +220,19 @@ FUNCTION LoginFlow():
     END
 ```
 
-<h4 id="erd">ERD (For Login and Registeration)</h4>
+<h4 id="erd">ERD (For Login and Registration)</h4>
 
 ![ERD](attachments/ERD.png)
 
 <h3 id="registration">Registration</h3>
 
 <h4 id="registration-flowchart">Flowchart</h4>
-![Registration Flowchart](attachments/registerationFlowchart.png)
+
+![Registration Flowchart](attachments/registrationFlowchart.png)
 
 <h4 id="registration-sequence-diagram">Sequence diagram</h4>
-![Registration Sequence Diagram](attachments/registerationSequenceDiagram.png)
+
+![Registration Sequence Diagram](attachments/registrationSequenceDiagram.png)
 
 
 <h4 id="registration-pseudocode">Pseudocode</h4>
